@@ -35,7 +35,11 @@ func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc string)
 		}
 		return timestamps, nil
 	case "1y":
-		return nil, nil
+		timestamps, err := ts.tr.Year(period, tmp1, tmp2, loc)
+		if err != nil {
+			return nil, err
+		}
+		return timestamps, nil
 	default:
 		return nil, errors.New("unsupported period")
 	}

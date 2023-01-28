@@ -89,5 +89,27 @@ func (tr TimestampRepository) Month(period, tmp1, tmp2, loc string) ([]time.Time
 }
 
 func (tr TimestampRepository) Year(period, tmp1, tmp2, loc string) ([]time.Time, error) {
-	return nil, nil
+	layout := "20060102T150405Z"
+	// set timezone to input parameter loc
+	location, err := time.LoadLocation(loc)
+	if err != nil {
+		return nil, err
+	}
+	// parse the timestamps
+	t1, err := time.ParseInLocation(layout, tmp1, location)
+	if err != nil {
+		return nil, err
+	}
+	t2, err := time.ParseInLocation(layout, tmp2, location)
+	if err != nil {
+		return nil, err
+	}
+	// initialize a slice to store the timestamps
+	var timestamps []time.Time
+	// Iterate over the time period of one day
+	for t := t1; t.Before(t2); {
+		timestamps = append(timestamps, t)
+		t = time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, location)
+	}
+	return timestamps, nil
 }
