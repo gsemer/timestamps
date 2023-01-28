@@ -17,7 +17,7 @@ type TimestampsService interface {
 
 type TimestampsRepository interface {
 	Hour(period, tmp1, tmp2, loc string) ([]time.Time, error)
-	Day() error
-	Month() error
-	Year() error
+	Day(period, tmp1, tmp2, loc string) ([]time.Time, error)
+	Month(period, tmp1, tmp2, loc string) ([]time.Time, error)
+	Year(period, tmp1, tmp2, loc string) ([]time.Time, error)
 }
