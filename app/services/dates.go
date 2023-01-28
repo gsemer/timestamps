@@ -23,9 +23,17 @@ func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc string)
 		}
 		return timestamps, nil
 	case "1d":
-		return nil, nil
+		timestamps, err := ts.tr.Day(period, tmp1, tmp2, loc)
+		if err != nil {
+			return nil, err
+		}
+		return timestamps, nil
 	case "1mo":
-		return nil, nil
+		timestamps, err := ts.tr.Month(period, tmp1, tmp2, loc)
+		if err != nil {
+			return nil, err
+		}
+		return timestamps, nil
 	case "1y":
 		return nil, nil
 	default:
