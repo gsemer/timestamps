@@ -14,12 +14,17 @@ func NewTimestampsRepository() *TimestampRepository {
 func (tr TimestampRepository) Hour(period, tmp1, tmp2, loc string) ([]time.Time, error) {
 	layout := "20060102T150405Z"
 
-	// Parse the timestamps
-	t1, err := time.Parse(layout, tmp1)
+	location, err := time.LoadLocation(loc)
 	if err != nil {
 		fmt.Println(err)
 	}
-	t2, err := time.Parse(layout, tmp2)
+
+	// Parse the timestamps
+	t1, err := time.ParseInLocation(layout, tmp1, location)
+	if err != nil {
+		fmt.Println(err)
+	}
+	t2, err := time.ParseInLocation(layout, tmp2, location)
 	if err != nil {
 		fmt.Println(err)
 	}
