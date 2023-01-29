@@ -1,9 +1,7 @@
 package domain
 
-import "time"
-
 type MatchingTimestamps struct {
-	Data []time.Time `json:"data"`
+	Data []string `json:"data"`
 }
 
 type Error struct {
@@ -12,12 +10,12 @@ type Error struct {
 }
 
 type TimestampsService interface {
-	GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]time.Time, error)
+	GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]string, error)
 }
 
 type TimestampsRepository interface {
-	Hour(period, tmp1, tmp2, loc string) ([]time.Time, error)
-	Day(period, tmp1, tmp2, loc string) ([]time.Time, error)
-	Month(period, tmp1, tmp2, loc string) ([]time.Time, error)
-	Year(period, tmp1, tmp2, loc string) ([]time.Time, error)
+	Hour(period, tmp1, tmp2, loc string) ([]string, error)
+	Day(period, tmp1, tmp2, loc string) ([]string, error)
+	Month(period, tmp1, tmp2, loc string) ([]string, error)
+	Year(period, tmp1, tmp2, loc string) ([]string, error)
 }

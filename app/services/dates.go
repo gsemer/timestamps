@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"time"
 	"timestamps/domain"
 )
 
@@ -14,7 +13,7 @@ func NewTimestampsService(tr domain.TimestampsRepository) *TimestampService {
 	return &TimestampService{tr: tr}
 }
 
-func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]time.Time, error) {
+func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]string, error) {
 	switch period {
 	case "1h":
 		timestamps, err := ts.tr.Hour(period, tmp1, tmp2, loc)
