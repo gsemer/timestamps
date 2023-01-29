@@ -25,6 +25,10 @@ func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, req
 		tmp1 = t1[0]
 		tmp2 = t2[0]
 		loc = tz[0]
+	} else {
+		writer.WriteHeader(http.StatusBadRequest)
+		writer.Write([]byte("make sure that you use all required query parameters"))
+		return
 	}
 
 	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc)
