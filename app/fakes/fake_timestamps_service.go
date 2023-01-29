@@ -3,12 +3,11 @@ package fakes
 
 import (
 	"sync"
-	"time"
 	"timestamps/domain"
 )
 
 type FakeTimestampsService struct {
-	GetMatchingTimestampsStub        func(string, string, string, string) ([]time.Time, error)
+	GetMatchingTimestampsStub        func(string, string, string, string) ([]string, error)
 	getMatchingTimestampsMutex       sync.RWMutex
 	getMatchingTimestampsArgsForCall []struct {
 		arg1 string
@@ -17,18 +16,18 @@ type FakeTimestampsService struct {
 		arg4 string
 	}
 	getMatchingTimestampsReturns struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	getMatchingTimestampsReturnsOnCall map[int]struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeTimestampsService) GetMatchingTimestamps(arg1 string, arg2 string, arg3 string, arg4 string) ([]time.Time, error) {
+func (fake *FakeTimestampsService) GetMatchingTimestamps(arg1 string, arg2 string, arg3 string, arg4 string) ([]string, error) {
 	fake.getMatchingTimestampsMutex.Lock()
 	ret, specificReturn := fake.getMatchingTimestampsReturnsOnCall[len(fake.getMatchingTimestampsArgsForCall)]
 	fake.getMatchingTimestampsArgsForCall = append(fake.getMatchingTimestampsArgsForCall, struct {
@@ -56,7 +55,7 @@ func (fake *FakeTimestampsService) GetMatchingTimestampsCallCount() int {
 	return len(fake.getMatchingTimestampsArgsForCall)
 }
 
-func (fake *FakeTimestampsService) GetMatchingTimestampsCalls(stub func(string, string, string, string) ([]time.Time, error)) {
+func (fake *FakeTimestampsService) GetMatchingTimestampsCalls(stub func(string, string, string, string) ([]string, error)) {
 	fake.getMatchingTimestampsMutex.Lock()
 	defer fake.getMatchingTimestampsMutex.Unlock()
 	fake.GetMatchingTimestampsStub = stub
@@ -69,28 +68,28 @@ func (fake *FakeTimestampsService) GetMatchingTimestampsArgsForCall(i int) (stri
 	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
 }
 
-func (fake *FakeTimestampsService) GetMatchingTimestampsReturns(result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsService) GetMatchingTimestampsReturns(result1 []string, result2 error) {
 	fake.getMatchingTimestampsMutex.Lock()
 	defer fake.getMatchingTimestampsMutex.Unlock()
 	fake.GetMatchingTimestampsStub = nil
 	fake.getMatchingTimestampsReturns = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsService) GetMatchingTimestampsReturnsOnCall(i int, result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsService) GetMatchingTimestampsReturnsOnCall(i int, result1 []string, result2 error) {
 	fake.getMatchingTimestampsMutex.Lock()
 	defer fake.getMatchingTimestampsMutex.Unlock()
 	fake.GetMatchingTimestampsStub = nil
 	if fake.getMatchingTimestampsReturnsOnCall == nil {
 		fake.getMatchingTimestampsReturnsOnCall = make(map[int]struct {
-			result1 []time.Time
+			result1 []string
 			result2 error
 		})
 	}
 	fake.getMatchingTimestampsReturnsOnCall[i] = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }

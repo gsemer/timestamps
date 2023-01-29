@@ -3,12 +3,11 @@ package fakes
 
 import (
 	"sync"
-	"time"
 	"timestamps/domain"
 )
 
 type FakeTimestampsRepository struct {
-	DayStub        func(string, string, string, string) ([]time.Time, error)
+	DayStub        func(string, string, string, string) ([]string, error)
 	dayMutex       sync.RWMutex
 	dayArgsForCall []struct {
 		arg1 string
@@ -17,14 +16,14 @@ type FakeTimestampsRepository struct {
 		arg4 string
 	}
 	dayReturns struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	dayReturnsOnCall map[int]struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
-	HourStub        func(string, string, string, string) ([]time.Time, error)
+	HourStub        func(string, string, string, string) ([]string, error)
 	hourMutex       sync.RWMutex
 	hourArgsForCall []struct {
 		arg1 string
@@ -33,14 +32,14 @@ type FakeTimestampsRepository struct {
 		arg4 string
 	}
 	hourReturns struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	hourReturnsOnCall map[int]struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
-	MonthStub        func(string, string, string, string) ([]time.Time, error)
+	MonthStub        func(string, string, string, string) ([]string, error)
 	monthMutex       sync.RWMutex
 	monthArgsForCall []struct {
 		arg1 string
@@ -49,14 +48,14 @@ type FakeTimestampsRepository struct {
 		arg4 string
 	}
 	monthReturns struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	monthReturnsOnCall map[int]struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
-	YearStub        func(string, string, string, string) ([]time.Time, error)
+	YearStub        func(string, string, string, string) ([]string, error)
 	yearMutex       sync.RWMutex
 	yearArgsForCall []struct {
 		arg1 string
@@ -65,18 +64,18 @@ type FakeTimestampsRepository struct {
 		arg4 string
 	}
 	yearReturns struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	yearReturnsOnCall map[int]struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}
 	invocations      map[string][][]interface{}
 	invocationsMutex sync.RWMutex
 }
 
-func (fake *FakeTimestampsRepository) Day(arg1 string, arg2 string, arg3 string, arg4 string) ([]time.Time, error) {
+func (fake *FakeTimestampsRepository) Day(arg1 string, arg2 string, arg3 string, arg4 string) ([]string, error) {
 	fake.dayMutex.Lock()
 	ret, specificReturn := fake.dayReturnsOnCall[len(fake.dayArgsForCall)]
 	fake.dayArgsForCall = append(fake.dayArgsForCall, struct {
@@ -104,7 +103,7 @@ func (fake *FakeTimestampsRepository) DayCallCount() int {
 	return len(fake.dayArgsForCall)
 }
 
-func (fake *FakeTimestampsRepository) DayCalls(stub func(string, string, string, string) ([]time.Time, error)) {
+func (fake *FakeTimestampsRepository) DayCalls(stub func(string, string, string, string) ([]string, error)) {
 	fake.dayMutex.Lock()
 	defer fake.dayMutex.Unlock()
 	fake.DayStub = stub
@@ -117,33 +116,33 @@ func (fake *FakeTimestampsRepository) DayArgsForCall(i int) (string, string, str
 	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
 }
 
-func (fake *FakeTimestampsRepository) DayReturns(result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) DayReturns(result1 []string, result2 error) {
 	fake.dayMutex.Lock()
 	defer fake.dayMutex.Unlock()
 	fake.DayStub = nil
 	fake.dayReturns = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) DayReturnsOnCall(i int, result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) DayReturnsOnCall(i int, result1 []string, result2 error) {
 	fake.dayMutex.Lock()
 	defer fake.dayMutex.Unlock()
 	fake.DayStub = nil
 	if fake.dayReturnsOnCall == nil {
 		fake.dayReturnsOnCall = make(map[int]struct {
-			result1 []time.Time
+			result1 []string
 			result2 error
 		})
 	}
 	fake.dayReturnsOnCall[i] = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) Hour(arg1 string, arg2 string, arg3 string, arg4 string) ([]time.Time, error) {
+func (fake *FakeTimestampsRepository) Hour(arg1 string, arg2 string, arg3 string, arg4 string) ([]string, error) {
 	fake.hourMutex.Lock()
 	ret, specificReturn := fake.hourReturnsOnCall[len(fake.hourArgsForCall)]
 	fake.hourArgsForCall = append(fake.hourArgsForCall, struct {
@@ -171,7 +170,7 @@ func (fake *FakeTimestampsRepository) HourCallCount() int {
 	return len(fake.hourArgsForCall)
 }
 
-func (fake *FakeTimestampsRepository) HourCalls(stub func(string, string, string, string) ([]time.Time, error)) {
+func (fake *FakeTimestampsRepository) HourCalls(stub func(string, string, string, string) ([]string, error)) {
 	fake.hourMutex.Lock()
 	defer fake.hourMutex.Unlock()
 	fake.HourStub = stub
@@ -184,33 +183,33 @@ func (fake *FakeTimestampsRepository) HourArgsForCall(i int) (string, string, st
 	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
 }
 
-func (fake *FakeTimestampsRepository) HourReturns(result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) HourReturns(result1 []string, result2 error) {
 	fake.hourMutex.Lock()
 	defer fake.hourMutex.Unlock()
 	fake.HourStub = nil
 	fake.hourReturns = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) HourReturnsOnCall(i int, result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) HourReturnsOnCall(i int, result1 []string, result2 error) {
 	fake.hourMutex.Lock()
 	defer fake.hourMutex.Unlock()
 	fake.HourStub = nil
 	if fake.hourReturnsOnCall == nil {
 		fake.hourReturnsOnCall = make(map[int]struct {
-			result1 []time.Time
+			result1 []string
 			result2 error
 		})
 	}
 	fake.hourReturnsOnCall[i] = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) Month(arg1 string, arg2 string, arg3 string, arg4 string) ([]time.Time, error) {
+func (fake *FakeTimestampsRepository) Month(arg1 string, arg2 string, arg3 string, arg4 string) ([]string, error) {
 	fake.monthMutex.Lock()
 	ret, specificReturn := fake.monthReturnsOnCall[len(fake.monthArgsForCall)]
 	fake.monthArgsForCall = append(fake.monthArgsForCall, struct {
@@ -238,7 +237,7 @@ func (fake *FakeTimestampsRepository) MonthCallCount() int {
 	return len(fake.monthArgsForCall)
 }
 
-func (fake *FakeTimestampsRepository) MonthCalls(stub func(string, string, string, string) ([]time.Time, error)) {
+func (fake *FakeTimestampsRepository) MonthCalls(stub func(string, string, string, string) ([]string, error)) {
 	fake.monthMutex.Lock()
 	defer fake.monthMutex.Unlock()
 	fake.MonthStub = stub
@@ -251,33 +250,33 @@ func (fake *FakeTimestampsRepository) MonthArgsForCall(i int) (string, string, s
 	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
 }
 
-func (fake *FakeTimestampsRepository) MonthReturns(result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) MonthReturns(result1 []string, result2 error) {
 	fake.monthMutex.Lock()
 	defer fake.monthMutex.Unlock()
 	fake.MonthStub = nil
 	fake.monthReturns = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) MonthReturnsOnCall(i int, result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) MonthReturnsOnCall(i int, result1 []string, result2 error) {
 	fake.monthMutex.Lock()
 	defer fake.monthMutex.Unlock()
 	fake.MonthStub = nil
 	if fake.monthReturnsOnCall == nil {
 		fake.monthReturnsOnCall = make(map[int]struct {
-			result1 []time.Time
+			result1 []string
 			result2 error
 		})
 	}
 	fake.monthReturnsOnCall[i] = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) Year(arg1 string, arg2 string, arg3 string, arg4 string) ([]time.Time, error) {
+func (fake *FakeTimestampsRepository) Year(arg1 string, arg2 string, arg3 string, arg4 string) ([]string, error) {
 	fake.yearMutex.Lock()
 	ret, specificReturn := fake.yearReturnsOnCall[len(fake.yearArgsForCall)]
 	fake.yearArgsForCall = append(fake.yearArgsForCall, struct {
@@ -305,7 +304,7 @@ func (fake *FakeTimestampsRepository) YearCallCount() int {
 	return len(fake.yearArgsForCall)
 }
 
-func (fake *FakeTimestampsRepository) YearCalls(stub func(string, string, string, string) ([]time.Time, error)) {
+func (fake *FakeTimestampsRepository) YearCalls(stub func(string, string, string, string) ([]string, error)) {
 	fake.yearMutex.Lock()
 	defer fake.yearMutex.Unlock()
 	fake.YearStub = stub
@@ -318,28 +317,28 @@ func (fake *FakeTimestampsRepository) YearArgsForCall(i int) (string, string, st
 	return argsForCall.arg1, argsForCall.arg2, argsForCall.arg3, argsForCall.arg4
 }
 
-func (fake *FakeTimestampsRepository) YearReturns(result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) YearReturns(result1 []string, result2 error) {
 	fake.yearMutex.Lock()
 	defer fake.yearMutex.Unlock()
 	fake.YearStub = nil
 	fake.yearReturns = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
 
-func (fake *FakeTimestampsRepository) YearReturnsOnCall(i int, result1 []time.Time, result2 error) {
+func (fake *FakeTimestampsRepository) YearReturnsOnCall(i int, result1 []string, result2 error) {
 	fake.yearMutex.Lock()
 	defer fake.yearMutex.Unlock()
 	fake.YearStub = nil
 	if fake.yearReturnsOnCall == nil {
 		fake.yearReturnsOnCall = make(map[int]struct {
-			result1 []time.Time
+			result1 []string
 			result2 error
 		})
 	}
 	fake.yearReturnsOnCall[i] = struct {
-		result1 []time.Time
+		result1 []string
 		result2 error
 	}{result1, result2}
 }
