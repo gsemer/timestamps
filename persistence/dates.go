@@ -105,7 +105,7 @@ func (tr TimestampRepository) Month(period, tmp1, tmp2, loc, layout string) ([]s
 		}
 		timestamps = append(timestamps, formatted)
 	}
-	return timestamps, nil
+	return timestamps[:len(timestamps)-1], nil
 }
 
 func (tr TimestampRepository) Year(period, tmp1, tmp2, loc, layout string) ([]string, error) {
@@ -134,5 +134,5 @@ func (tr TimestampRepository) Year(period, tmp1, tmp2, loc, layout string) ([]st
 		timestamps = append(timestamps, formatted)
 		t = time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, location)
 	}
-	return timestamps, nil
+	return timestamps[:len(timestamps)-1], nil
 }
