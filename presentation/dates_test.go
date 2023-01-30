@@ -21,7 +21,6 @@ func TestTimestampHandler_GetMatchingTimestamps_Year(t *testing.T) {
 			"20180214T204603Z",
 			"20190101T000000Z",
 			"20200101T000000Z",
-			"20210101T000000Z",
 		},
 	}
 	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
@@ -77,7 +76,6 @@ func TestTimestampHandler_GetMatchingTimestamps_Month(t *testing.T) {
 			"20210813T214603Z",
 			"20210912T214603Z",
 			"20211012T214603Z",
-			"20211111T204603Z",
 		},
 	}
 	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
