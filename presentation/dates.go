@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"timestamps/domain"
+	"timestamps/domain/constants"
 )
 
 type TimestampHandler struct {
@@ -35,9 +36,7 @@ func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, req
 		writer.Write([]byte("make sure that you use all required query parameters"))
 		return
 	}
-
-	layout := "20060102T150405Z"
-	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc, layout)
+	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc, constants.UTC)
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		err2 := domain.Error{
