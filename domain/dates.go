@@ -10,12 +10,12 @@ type Error struct {
 }
 
 type TimestampsService interface {
-	GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]string, error)
+	GetMatchingTimestamps(period, tmp1, tmp2, loc, layout string) ([]string, error)
 }
 
 type TimestampsRepository interface {
-	Hour(period, tmp1, tmp2, loc string) ([]string, error)
-	Day(period, tmp1, tmp2, loc string) ([]string, error)
-	Month(period, tmp1, tmp2, loc string) ([]string, error)
-	Year(period, tmp1, tmp2, loc string) ([]string, error)
+	Hour(period, tmp1, tmp2, loc, layout string) ([]string, error)
+	Day(period, tmp1, tmp2, loc, layout string) ([]string, error)
+	Month(period, tmp1, tmp2, loc, layout string) ([]string, error)
+	Year(period, tmp1, tmp2, loc, layout string) ([]string, error)
 }

@@ -36,7 +36,8 @@ func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, req
 		return
 	}
 
-	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc)
+	layout := "20060102T150405Z"
+	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc, layout)
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		err2 := domain.Error{

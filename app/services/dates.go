@@ -13,28 +13,28 @@ func NewTimestampsService(tr domain.TimestampsRepository) *TimestampService {
 	return &TimestampService{tr: tr}
 }
 
-func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc string) ([]string, error) {
+func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc, layout string) ([]string, error) {
 	switch period {
 	case "1h":
-		timestamps, err := ts.tr.Hour(period, tmp1, tmp2, loc)
+		timestamps, err := ts.tr.Hour(period, tmp1, tmp2, loc, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
 	case "1d":
-		timestamps, err := ts.tr.Day(period, tmp1, tmp2, loc)
+		timestamps, err := ts.tr.Day(period, tmp1, tmp2, loc, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
 	case "1mo":
-		timestamps, err := ts.tr.Month(period, tmp1, tmp2, loc)
+		timestamps, err := ts.tr.Month(period, tmp1, tmp2, loc, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
 	case "1y":
-		timestamps, err := ts.tr.Year(period, tmp1, tmp2, loc)
+		timestamps, err := ts.tr.Year(period, tmp1, tmp2, loc, layout)
 		if err != nil {
 			return nil, err
 		}
