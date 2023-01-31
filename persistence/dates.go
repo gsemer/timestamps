@@ -1,6 +1,7 @@
 package persistence
 
 import (
+	"strconv"
 	"time"
 )
 
@@ -21,24 +22,10 @@ func ConvertTimeToString(t time.Time, layout string) (string, error) {
 	return formatted, nil
 }
 
-func (tr TimestampRepository) Hour(period, tmp1, tmp2, loc, layout string) ([]string, error) {
-	// set timezone to input parameter loc
-	location, err := time.LoadLocation(loc)
-	if err != nil {
-		return nil, err
-	}
-	// parse the timestamps
-	t1, err := time.ParseInLocation(layout, tmp1, location)
-	if err != nil {
-		return nil, err
-	}
-	t2, err := time.ParseInLocation(layout, tmp2, location)
-	if err != nil {
-		return nil, err
-	}
+func (tr TimestampRepository) Hour(period string, t1, t2 time.Time, location *time.Location, layout string) ([]string, error) {
 	// initialize a slice to store the timestamps
 	var timestamps []string
-	// iterate over the time period of one hour
+	// iterate over the time period of num of hours
 	hour, _ := time.ParseDuration(period)
 	for t := t1; t.Before(t2); t = t.Add(hour) {
 		formatted, err := ConvertTimeToString(t, layout)
@@ -50,89 +37,52 @@ func (tr TimestampRepository) Hour(period, tmp1, tmp2, loc, layout string) ([]st
 	return timestamps, nil
 }
 
-func (tr TimestampRepository) Day(period, tmp1, tmp2, loc, layout string) ([]string, error) {
-	// set timezone to input parameter loc
-	location, err := time.LoadLocation(loc)
-	if err != nil {
-		return nil, err
-	}
-	// parse the timestamps
-	t1, err := time.ParseInLocation(layout, tmp1, location)
-	if err != nil {
-		return nil, err
-	}
-	t2, err := time.ParseInLocation(layout, tmp2, location)
-	if err != nil {
-		return nil, err
-	}
+func (tr TimestampRepository) Day(period string, t1, t2 time.Time, location *time.Location, layout string) ([]string, error) {
+	numOfDays := period[:len(period)-1]
+	numOfDaysToInt, _ := strconv.Atoi(numOfDays)
 	// initialize a slice to store the timestamps
 	var timestamps []string
-	// Iterate over the time period of one day
+	// iterate over the time period of num of days
 	for t := t1; t.Before(t2); {
 		formatted, err := ConvertTimeToString(t, layout)
 		if err != nil {
 			return nil, err
 		}
 		timestamps = append(timestamps, formatted)
-		t = t.AddDate(0, 0, 1)
+		t = t.AddDate(0, 0, numOfDaysToInt)
 	}
 	return timestamps, nil
 }
 
-func (tr TimestampRepository) Month(period, tmp1, tmp2, loc, layout string) ([]string, error) {
-	// set timezone to input parameter loc
-	location, err := time.LoadLocation(loc)
-	if err != nil {
-		return nil, err
-	}
-	// parse the timestamps
-	t1, err := time.ParseInLocation(layout, tmp1, location)
-	if err != nil {
-		return nil, err
-	}
-	t2, err := time.ParseInLocation(layout, tmp2, location)
-	if err != nil {
-		return nil, err
-	}
+func (tr TimestampRepository) Month(period string, t1, t2 time.Time, location *time.Location, layout string) ([]string, error) {
+	numOfDays := period[:len(period)-2]
+	numOfDaysToInt, _ := strconv.Atoi(numOfDays)
 	// initialize a slice to store the timestamps
 	var timestamps []string
-	// iterate over the time period of one month
-	month := time.Duration(30 * 24 * time.Hour)
-	for t := t1; t.Before(t2); t = t.Add(month) {
+	// iterate over the time period of num of months
+	for t := t1; t.Before(t2); t = t.AddDate(0, numOfDaysToInt, 0) {
 		formatted, err := ConvertTimeToString(t, layout)
 		if err != nil {
 			return nil, err
 		}
 		timestamps = append(timestamps, formatted)
 	}
-	return timestamps[:len(timestamps)-1], nil
+	return timestamps, nil
 }
 
-func (tr TimestampRepository) Year(period, tmp1, tmp2, loc, layout string) ([]string, error) {
-	// set timezone to input parameter loc
-	location, err := time.LoadLocation(loc)
-	if err != nil {
-		return nil, err
-	}
-	// parse the timestamps
-	t1, err := time.ParseInLocation(layout, tmp1, location)
-	if err != nil {
-		return nil, err
-	}
-	t2, err := time.ParseInLocation(layout, tmp2, location)
-	if err != nil {
-		return nil, err
-	}
+func (tr TimestampRepository) Year(period string, t1, t2 time.Time, location *time.Location, layout string) ([]string, error) {
+	numOfDays := period[:len(period)-1]
+	numOfDaysToInt, _ := strconv.Atoi(numOfDays)
 	// initialize a slice to store the timestamps
 	var timestamps []string
-	// Iterate over the time period of one day
+	// Iterate over the time period of num of years
 	for t := t1; t.Before(t2); {
 		formatted, err := ConvertTimeToString(t, layout)
 		if err != nil {
 			return nil, err
 		}
 		timestamps = append(timestamps, formatted)
-		t = time.Date(t.Year()+1, 1, 1, 0, 0, 0, 0, location)
+		t = time.Date(t.Year()+numOfDaysToInt, 1, 1, 0, 0, 0, 0, location)
 	}
-	return timestamps[:len(timestamps)-1], nil
+	return timestamps, nil
 }
