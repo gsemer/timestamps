@@ -21,22 +21,21 @@ type MatchingTimestampsResponse struct {
 
 func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, request *http.Request) {
 	p, found1 := request.URL.Query()["period"]
-	t1, found2 := request.URL.Query()["t1"]
-	t2, found3 := request.URL.Query()["t2"]
+	first, found2 := request.URL.Query()["t1"]
+	second, found3 := request.URL.Query()["t2"]
 	tz, found4 := request.URL.Query()["tz"]
-	var period, tmp1, tmp2, loc string
-
+	var period, t1, t2, location string
 	if found1 && found2 && found3 && found4 {
 		period = p[0]
-		tmp1 = t1[0]
-		tmp2 = t2[0]
-		loc = tz[0]
+		t1 = first[0]
+		t2 = second[0]
+		location = tz[0]
 	} else {
 		writer.WriteHeader(http.StatusBadRequest)
 		writer.Write([]byte("make sure that you use all required query parameters"))
 		return
 	}
-	timestamps, err := th.ts.GetMatchingTimestamps(period, tmp1, tmp2, loc, constants.UTC)
+	timestamps, err := th.ts.GetMatchingTimestamps(period, t1, t2, location, constants.UTC)
 	if err != nil {
 		writer.WriteHeader(http.StatusBadRequest)
 		err2 := domain.Error{
