@@ -2,7 +2,6 @@ package services
 
 import (
 	"errors"
-	"strings"
 	"time"
 	"timestamps/domain"
 )
@@ -35,26 +34,26 @@ func (ts TimestampService) GetMatchingTimestamps(period, tmp1, tmp2, loc, layout
 		return nil, errors.New("invalid query parameters: t1 must be less than t2")
 	}
 	// handle every case separately based on the period
-	switch {
-	case strings.Contains(period, "h"):
+	switch period {
+	case "1h":
 		timestamps, err := ts.tr.Hour(period, t1, t2, location, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
-	case strings.Contains(period, "d"):
+	case "1d":
 		timestamps, err := ts.tr.Day(period, t1, t2, location, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
-	case strings.Contains(period, "mo"):
+	case "1mo":
 		timestamps, err := ts.tr.Month(period, t1, t2, location, layout)
 		if err != nil {
 			return nil, err
 		}
 		return timestamps, nil
-	case strings.Contains(period, "y"):
+	case "1y":
 		timestamps, err := ts.tr.Year(period, t1, t2, location, layout)
 		if err != nil {
 			return nil, err
