@@ -11,20 +11,16 @@ import (
 	"reflect"
 	"testing"
 	"timestamps/app/fakes"
-	"timestamps/domain"
 )
 
 func TestTimestampHandler_GetMatchingTimestamps_Year(t *testing.T) {
 	ts := &fakes.FakeTimestampsService{}
-	matchingTimestamps := domain.MatchingTimestamps{
-		Data: []string{
-			"20180214T204603Z",
-			"20190101T000000Z",
-			"20200101T000000Z",
-			"20210101T000000Z",
-		},
+	matchingTimestamps := []string{
+		"20180214T210000Z",
+		"20190214T210000Z",
+		"20200214T210000Z",
 	}
-	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
+	ts.GetMatchingTimestampsReturns(matchingTimestamps, nil)
 
 	myHandlerFunc := TimestampHandler{ts: ts}
 
@@ -51,14 +47,14 @@ func TestTimestampHandler_GetMatchingTimestamps_Year(t *testing.T) {
 		return
 	}
 
-	result := MatchingTimestampsResponse{}
+	var result []string
 	err = json.Unmarshal(matchingTimestampsList, &result)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	if !reflect.DeepEqual(result.Data, matchingTimestamps.Data) {
+	if !reflect.DeepEqual(result, matchingTimestamps) {
 		t.Error("[ERROR] Not the expected output")
 		return
 	}
@@ -66,21 +62,18 @@ func TestTimestampHandler_GetMatchingTimestamps_Year(t *testing.T) {
 
 func TestTimestampHandler_GetMatchingTimestamps_Month(t *testing.T) {
 	ts := &fakes.FakeTimestampsService{}
-	matchingTimestamps := domain.MatchingTimestamps{
-		Data: []string{
-			"20210214T204603Z",
-			"20210316T204603Z",
-			"20210415T214603Z",
-			"20210515T214603Z",
-			"20210614T214603Z",
-			"20210714T214603Z",
-			"20210813T214603Z",
-			"20210912T214603Z",
-			"20211012T214603Z",
-			"20211111T204603Z",
-		},
+	matchingTimestamps := []string{
+		"20210214T210000Z",
+		"20210314T210000Z",
+		"20210414T210000Z",
+		"20210514T210000Z",
+		"20210614T210000Z",
+		"20210714T210000Z",
+		"20210814T210000Z",
+		"20210914T210000Z",
+		"20211014T210000Z",
 	}
-	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
+	ts.GetMatchingTimestampsReturns(matchingTimestamps, nil)
 
 	myHandlerFunc := TimestampHandler{ts: ts}
 
@@ -107,14 +100,14 @@ func TestTimestampHandler_GetMatchingTimestamps_Month(t *testing.T) {
 		return
 	}
 
-	result := MatchingTimestampsResponse{}
+	var result []string
 	err = json.Unmarshal(matchingTimestampsList, &result)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	if !reflect.DeepEqual(result.Data, matchingTimestamps.Data) {
+	if !reflect.DeepEqual(result, matchingTimestamps) {
 		t.Error("[ERROR] Not the expected output")
 		return
 	}
@@ -122,47 +115,45 @@ func TestTimestampHandler_GetMatchingTimestamps_Month(t *testing.T) {
 
 func TestTimestampHandler_GetMatchingTimestamps_Day(t *testing.T) {
 	ts := &fakes.FakeTimestampsService{}
-	matchingTimestamps := domain.MatchingTimestamps{
-		Data: []string{
-			"20211010T204603Z",
-			"20211011T204603Z",
-			"20211012T204603Z",
-			"20211013T204603Z",
-			"20211014T204603Z",
-			"20211015T204603Z",
-			"20211016T204603Z",
-			"20211017T204603Z",
-			"20211018T204603Z",
-			"20211019T204603Z",
-			"20211020T204603Z",
-			"20211021T204603Z",
-			"20211022T204603Z",
-			"20211023T204603Z",
-			"20211024T204603Z",
-			"20211025T204603Z",
-			"20211026T204603Z",
-			"20211027T204603Z",
-			"20211028T204603Z",
-			"20211029T204603Z",
-			"20211030T204603Z",
-			"20211031T204603Z",
-			"20211101T204603Z",
-			"20211102T204603Z",
-			"20211103T204603Z",
-			"20211104T204603Z",
-			"20211105T204603Z",
-			"20211106T204603Z",
-			"20211107T204603Z",
-			"20211108T204603Z",
-			"20211109T204603Z",
-			"20211110T204603Z",
-			"20211111T204603Z",
-			"20211112T204603Z",
-			"20211113T204603Z",
-			"20211114T204603Z",
-		},
+	matchingTimestamps := []string{
+		"20211010T210000Z",
+		"20211011T210000Z",
+		"20211012T210000Z",
+		"20211013T210000Z",
+		"20211014T210000Z",
+		"20211015T210000Z",
+		"20211016T210000Z",
+		"20211017T210000Z",
+		"20211018T210000Z",
+		"20211019T210000Z",
+		"20211020T210000Z",
+		"20211021T210000Z",
+		"20211022T210000Z",
+		"20211023T210000Z",
+		"20211024T210000Z",
+		"20211025T210000Z",
+		"20211026T210000Z",
+		"20211027T210000Z",
+		"20211028T210000Z",
+		"20211029T210000Z",
+		"20211030T210000Z",
+		"20211031T210000Z",
+		"20211101T210000Z",
+		"20211102T210000Z",
+		"20211103T210000Z",
+		"20211104T210000Z",
+		"20211105T210000Z",
+		"20211106T210000Z",
+		"20211107T210000Z",
+		"20211108T210000Z",
+		"20211109T210000Z",
+		"20211110T210000Z",
+		"20211111T210000Z",
+		"20211112T210000Z",
+		"20211113T210000Z",
+		"20211114T210000Z",
 	}
-	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
+	ts.GetMatchingTimestampsReturns(matchingTimestamps, nil)
 
 	myHandlerFunc := TimestampHandler{ts: ts}
 
@@ -189,14 +180,14 @@ func TestTimestampHandler_GetMatchingTimestamps_Day(t *testing.T) {
 		return
 	}
 
-	result := MatchingTimestampsResponse{}
+	var result []string
 	err = json.Unmarshal(matchingTimestampsList, &result)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	if !reflect.DeepEqual(result.Data, matchingTimestamps.Data) {
+	if !reflect.DeepEqual(result, matchingTimestamps) {
 		t.Error("[ERROR] Not the expected output")
 		return
 	}
@@ -204,27 +195,25 @@ func TestTimestampHandler_GetMatchingTimestamps_Day(t *testing.T) {
 
 func TestTimestampHandler_GetMatchingTimestamps_Hour(t *testing.T) {
 	ts := &fakes.FakeTimestampsService{}
-	matchingTimestamps := domain.MatchingTimestamps{
-		Data: []string{
-			"20210714T204603Z",
-			"20210714T214603Z",
-			"20210714T224603Z",
-			"20210714T234603Z",
-			"20210715T004603Z",
-			"20210715T014603Z",
-			"20210715T024603Z",
-			"20210715T034603Z",
-			"20210715T044603Z",
-			"20210715T054603Z",
-			"20210715T064603Z",
-			"20210715T074603Z",
-			"20210715T084603Z",
-			"20210715T094603Z",
-			"20210715T104603Z",
-			"20210715T114603Z",
-		},
+	matchingTimestamps := []string{
+		"20210714T210000Z",
+		"20210714T220000Z",
+		"20210714T230000Z",
+		"20210715T000000Z",
+		"20210715T010000Z",
+		"20210715T020000Z",
+		"20210715T030000Z",
+		"20210715T040000Z",
+		"20210715T050000Z",
+		"20210715T060000Z",
+		"20210715T070000Z",
+		"20210715T080000Z",
+		"20210715T090000Z",
+		"20210715T100000Z",
+		"20210715T110000Z",
+		"20210715T120000Z",
 	}
-	ts.GetMatchingTimestampsReturns(matchingTimestamps.Data, nil)
+	ts.GetMatchingTimestampsReturns(matchingTimestamps, nil)
 
 	myHandlerFunc := TimestampHandler{ts: ts}
 
@@ -251,14 +240,14 @@ func TestTimestampHandler_GetMatchingTimestamps_Hour(t *testing.T) {
 		return
 	}
 
-	result := MatchingTimestampsResponse{}
+	var result []string
 	err = json.Unmarshal(matchingTimestampsList, &result)
 	if err != nil {
 		t.Error(err)
 		return
 	}
 
-	if !reflect.DeepEqual(result.Data, matchingTimestamps.Data) {
+	if !reflect.DeepEqual(result, matchingTimestamps) {
 		t.Error("[ERROR] Not the expected output")
 		return
 	}
