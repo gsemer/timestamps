@@ -15,10 +15,6 @@ func NewTimestampsHandler(ts domain.TimestampsService) *TimestampHandler {
 	return &TimestampHandler{ts: ts}
 }
 
-type MatchingTimestampsResponse struct {
-	Data []string `json:"data"`
-}
-
 func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, request *http.Request) {
 	p, found1 := request.URL.Query()["period"]
 	first, found2 := request.URL.Query()["t1"]
@@ -46,10 +42,8 @@ func (th TimestampHandler) GetMatchingTimestamps(writer http.ResponseWriter, req
 		writer.Write(resultErr)
 		return
 	}
-
 	writer.WriteHeader(http.StatusOK)
-	matchingTimestamps := MatchingTimestampsResponse{Data: timestamps}
-	result, _ := json.Marshal(matchingTimestamps)
+	result, _ := json.Marshal(timestamps)
 	writer.Write(result)
 	return
 }
