@@ -2,13 +2,9 @@ package domain
 
 import "time"
 
-type MatchingTimestamps struct {
-	Data []string `json:"data"`
-}
-
 type Error struct {
 	Status      string `json:"status"`
-	Description string `json:"description"`
+	Description string `json:"desc"`
 }
 
 type TimestampsService interface {
