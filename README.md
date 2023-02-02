@@ -19,9 +19,9 @@ You can either run the main application in a GoLand environment or run the docke
 
 ### Examples
 Open a browser and run the following urls:
-- `http://localhost:8000//ptlist?period=1h&tz=Europe/Athens&t1=20210714T204603Z&t2=20210715T123456Z`
+- `http://localhost:8000/ptlist?period=1h&tz=Europe/Athens&t1=20210714T204603Z&t2=20210715T123456Z`
 - `http://localhost:8000/ptlist?period=1d&tz=Europe/Athens&t1=20211010T204603Z&t2=20211115T123456Z`
 - `http://localhost:8000/ptlist?period=1mo&tz=Europe/Athens&t1=20210214T204603Z&t2=20211115T123456Z`
 -  `http://localhost:8000/ptlist?period=1y&tz=Europe/Athens&t1=20180214T204603Z&t2=20211115T123456Z`
-- `http://localhost:8000//ptlist?period=1w&tz=Europe/Athens&t1=20210714T204603Z&t2=20210715T123456Z`
+- `http://localhost:8000/ptlist?period=1w&tz=Europe/Athens&t1=20210714T204603Z&t2=20210715T123456Z`
 
