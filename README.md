@@ -3,8 +3,8 @@
 This service follows domain-driven design architecture. The main application can be found in cmd/main.go. In presentation, app and persistence folders there are the handlers, the services and the repositories respectively. Inside the first two there are fakes folders in which you can found fake implementations of methods as obtained by using counterfeiter package. Furthermore, unit tests have been implemented and can be found in there as well. The domain folder contains the definitions of structures and interfaces.  
 
 ## Packages Installation
+- `go get -u github.com/maxbrunsfeld/counterfeiter`
 - `go get github.com/gorilla/mux`
-- `go mod download`
 
 ## Environment Variables
 `SERVE_ON_PORT`: The port that this service runs on. The default value is 8000.
